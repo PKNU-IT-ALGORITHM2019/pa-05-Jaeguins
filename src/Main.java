@@ -29,10 +29,8 @@ public class Main {
                     break;
                 case "find":
                     ArrayList<Node> tT = m.binarySearch.find(scanner.next());
-                    if (tT.size() <= 0)
-                        System.out.println(Strings.NotFound);
-                    else for (Node t : tT)
-                        System.out.println(t);
+                    if (tT.size() <= 0) System.out.println(Strings.NotFound);
+                    else for (Node t : tT) System.out.println(t);
                     break;
                 case "deleteall":
                     m.deleteAll(scanner.next());
@@ -62,39 +60,32 @@ public class Main {
         Scanner fScanner;
         try {
             fScanner = new Scanner(new File(path));
-
             int count = 0;
             while (fScanner.hasNext()) {
                 binarySearch.add(readNode(fScanner));
                 count++;
             }
             System.out.println(count + Strings.AddAllComplete);
-        } catch (FileNotFoundException e) {
-            System.out.println(Strings.NotFound);
-        }
+        } catch (FileNotFoundException e) {System.out.println(Strings.NotFound);}
     }
 
     private void deleteAll(String path) {
         Scanner fScanner;
         try {
             fScanner = new Scanner(new File(path));
-
             int count = 0;
             while (fScanner.hasNext()) {
                 binarySearch.delete(fScanner.nextLine(), true);
                 count++;
             }
             System.out.println(count + Strings.DelAllComplete);
-        } catch (FileNotFoundException e) {
-            System.out.println(Strings.NotFound);
-        }
+        } catch (FileNotFoundException e) {System.out.println(Strings.NotFound);}
     }
 }
 
 class BinarySearch {
     int size = 0;
     private Node root = null;
-
     void add(Node adder) {
         Node t = root, preT = null;
         boolean flag = false;
@@ -202,33 +193,15 @@ class Node {
     }
 
     @Override
-    public String toString() {
-        return word + Strings.Open + wordClass + Strings.Close + desc;
-    }
+    public String toString() {return word + Strings.Open + wordClass + Strings.Close + desc;}
 
-    Node getMaxLeft() {
-        return left != null ? left.getRightRecursive() : null;
-    }
+    Node getMaxLeft() {return left != null ? left.getRightRecursive() : null;}
 
-    Node getMinRight() {
-        return right != null ? right.getLeftRecursive() : null;
-    }
+    Node getMinRight() {return right != null ? right.getLeftRecursive() : null;}
 
-    private Node getLeftRecursive() {
-        if (left != null) {
-            return left.getLeftRecursive();
-        } else {
-            return this;
-        }
-    }
+    private Node getLeftRecursive() {return left!=null?left.getLeftRecursive():this;}
 
-    private Node getRightRecursive() {
-        if (right != null)
-            return right.getRightRecursive();
-        else {
-            return this;
-        }
-    }
+    private Node getRightRecursive() { return right!=null?right.getRightRecursive():this;}
 
     void replace(Node target) {
         word = target.word;
